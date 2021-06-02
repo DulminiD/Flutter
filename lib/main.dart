@@ -1,85 +1,96 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-void main() => runApp(MyApp());
-final dummySnapshot = [
-  {"name": "Flutter", "votes": 15},
-  {"name": "Android", "votes": 14},
-  {"name": "IOS", "votes": 11},
-  {"name": "Xamerin", "votes": 10},
-  {"name": "React", "votes": 1},
-];
+
+void main()  {
+  runApp(MyApp());
+}
+
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Apps',
       home: MyHomePage(),
     );
   }
-
 }
+
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() {
-    return _MyHomePageState();
-  }
+  _MyHomePageState createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
+
+  final Firestore firestore = Firestore.instance;
+
+
+  void _create() async {
+    try {
+      await firestore.collection('users').document('testUser').setData({
+        'firstName': 'John',
+        'lastName': 'Peter',
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _read() async {
+    DocumentSnapshot documentSnapshot;
+    try {
+      documentSnapshot = await firestore.collection('users').document('testUser').get();
+      print(documentSnapshot.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _update() async {
+    try {
+      firestore.collection('users').document('testUser').updateData({
+        'firstName': 'Alan',
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _delete() async {
+    try {
+      firestore.collection('users').document('testUser').delete();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Best App by Votes')),
-      body: _buildBody(context),
-    );
-  }
-  Widget _buildBody(BuildContext context) {
-    // TODO: get actual snapshot from Cloud Firestore
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('users').snapshots(),
-      builder: (context, snapshot){
-        if(!snapshot.hasData) return LinearProgressIndicator();
-
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
-
-  }
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-    return Padding(
-      key: ValueKey(record.name),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.votes.toString()),
-          onTap: () => print(record),
-        ),
+      appBar: AppBar(
+        title: Text("Flutter CRUD with Firebase"),
+      ),
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          RaisedButton(
+            child: Text("Create"),
+            onPressed: _create,
+          ),
+          RaisedButton(
+            child: Text("Read"),
+            onPressed: _read,
+          ),
+          RaisedButton(
+            child: Text("Update"),
+            onPressed: _update,
+          ),
+          RaisedButton(
+            child: Text("Delete"),
+            onPressed: _delete,
+          ),
+        ]),
       ),
     );
   }
-}
-class Record {
-  final String name;
-  final int votes;
-  final DocumentReference reference;
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['userName'] != null),
-        assert(map['id'] != null),
-        name = map['userName'],
-        votes = map['id'];
-  Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-  @override
-  String toString() => "Record<$name:$votes>";
 }
