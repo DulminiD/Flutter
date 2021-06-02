@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_app/Controller/addStudent.dart';
+
 
 void main()  {
   runApp(MyApp());
@@ -11,30 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      home: Home(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
+class Home extends StatefulWidget {
+  _HomeState createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
+class _HomeState extends State<Home>{
   final Firestore firestore = Firestore.instance;
 
-
   void _create() async {
-    try {
-      await firestore.collection('users').document('testUser').setData({
-        'firstName': 'John',
-        'lastName': 'Peter',
-      });
-    } catch (e) {
-      print(e);
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddStudent()),
+    );
+
   }
 
   void _read() async {
@@ -65,6 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,4 +89,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }
