@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
 
-
 void main()  {
   runApp(MyApp());
 }
@@ -34,8 +33,9 @@ class _HomeState extends State<Home>{
 
   void _read() async {
     DocumentSnapshot documentSnapshot;
+
     try {
-      documentSnapshot = await firestore.collection('users').document('testUser').get();
+      documentSnapshot = await firestore.collection('users').document('IT11').get();
       print(documentSnapshot.data);
     } catch (e) {
       print(e);
