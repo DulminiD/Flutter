@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
 
+import 'View/StudentView.dart';
 
-void main()  {
+void main() {
   runApp(MyApp());
 }
 
@@ -21,7 +22,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home>{
+class _HomeState extends State<Home> {
   final Firestore firestore = Firestore.instance;
 
   void _create() async {
@@ -29,13 +30,13 @@ class _HomeState extends State<Home>{
       context,
       MaterialPageRoute(builder: (context) => AddStudent()),
     );
-
   }
 
   void _read() async {
     DocumentSnapshot documentSnapshot;
     try {
-      documentSnapshot = await firestore.collection('users').document('testUser').get();
+      documentSnapshot =
+          await firestore.collection('users').document('testUser').get();
       print(documentSnapshot.data);
     } catch (e) {
       print(e);
@@ -59,7 +60,6 @@ class _HomeState extends State<Home>{
       print(e);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,17 @@ class _HomeState extends State<Home>{
           ),
         ]),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentView(id: 'IT03'),
+              ));
+        },
+        child: const Icon(Icons.free_breakfast_rounded),
+        backgroundColor: Colors.pink,
+      ),
     );
   }
-
 }
