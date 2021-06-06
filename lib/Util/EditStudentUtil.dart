@@ -1,11 +1,10 @@
 import 'dart:collection';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/View/StudentView.dart';
 
-Widget editStudentWidget(DocumentSnapshot data, BuildContext context) {
+Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
   TextEditingController controller =
       new TextEditingController(text: data["sName"]);
   List<TextEditingController> controllers = [];
@@ -101,7 +100,7 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext context) {
           ),
         ),
         onPressed: () {
-          update(data["sId"], controller, controllers, context);
+          update(data["sId"], controller, controllers, buildContext);
         },
         child: Text('Save'),
       ),
@@ -134,7 +133,7 @@ Widget assignmentSection(String name) {
 }
 
 void update(id, TextEditingController controller,
-    List<TextEditingController> controllers, BuildContext context) async {
+    List<TextEditingController> controllers, BuildContext buildContext) async {
   final Firestore firestore = Firestore.instance;
   print(id);
   print(controller.text);
@@ -148,7 +147,7 @@ void update(id, TextEditingController controller,
       'sName': controller.text,
       'assignments': hashMap
     }).then((value) => {
-          Navigator.push(context,
+          Navigator.push(buildContext,
               MaterialPageRoute(builder: (context) => StudentView(id: id))),
         });
   } catch (e) {
