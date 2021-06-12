@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
 import 'View/StudentView.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,13 +13,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: Splash(),
     );
   }
 }
 
 class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
+}
+
+class Splash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen(
+      seconds: 6,
+      navigateAfterSeconds: new Home(),
+      title: new Text('Dulmaynayyy',textScaleFactor: 2,),
+      image: Image.asset(
+        'images/img.png',
+        width: 100,
+        height: 100,
+      ),
+      loadingText: Text("Loading"),
+      photoSize: 100.0,
+      loaderColor: Colors.blue,
+    );
+  }
 }
 
 class _HomeState extends State<Home> {
