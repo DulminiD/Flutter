@@ -14,7 +14,7 @@ class mainView extends StatelessWidget{
             // constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
               image: new DecorationImage(
-                  image: new AssetImage('images/8.png'),
+                  image: new AssetImage('images/2.png'),
                 fit: BoxFit.cover,
               )
               ),

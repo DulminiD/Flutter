@@ -253,7 +253,7 @@ class _AddStudentState extends State<AddStudent> {
                               child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
                                 controller: sId,
                                 decoration: new InputDecoration(labelText: "Student ID", labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20.0
+                                    color: Color(0xFF7401b8), fontSize: 20.0
                                 )
                                 ),
                                 onChanged : (value)=>_onChangesId(value),
@@ -264,7 +264,7 @@ class _AddStudentState extends State<AddStudent> {
                               child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
                                 controller: sName,
                                 decoration: new InputDecoration(labelText: "Student Name", labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20.0
+                                    color: Color(0xFF7401b8), fontSize: 20.0
                                 )),
                                 onChanged : (value)=>_onChangesName(value),
                               ),),
@@ -274,7 +274,7 @@ class _AddStudentState extends State<AddStudent> {
                               child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
                                 controller: sModule,
                                 decoration: new InputDecoration(labelText: "Student Module", labelStyle: TextStyle(
-                                    color: Colors.black, fontSize: 20.0
+                                    color: Color(0xFF7401b8), fontSize: 20.0
                                 )),
                                 onChanged : (value)=>_onChangesModule(value),
                               ),),

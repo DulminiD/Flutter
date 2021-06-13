@@ -17,7 +17,7 @@ class background extends StatelessWidget {
                         bottomRight: Radius.circular(50.0),
                         bottomLeft: Radius.circular(50.0)),
                     image: new DecorationImage(
-                      image: new AssetImage('images/2.png'),
+                      image: new AssetImage('images/9.png'),
                       fit: BoxFit.cover,
                     )
                 ),

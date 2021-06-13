@@ -18,16 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: Splash(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class Splash extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();
 }
-class SplashScreenState extends State<MyHomePage> {
+class SplashScreenState extends State<Splash> {
   @override
   void initState() {
     super.initState();
@@ -41,55 +41,53 @@ class SplashScreenState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Center(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      image: new DecorationImage(
-                        image: new AssetImage('images/2.png'),
-                        fit: BoxFit.cover,
-                      )
-                  ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    image: new DecorationImage(
+                      image: new AssetImage('images/2.png'),
+                      fit: BoxFit.cover,
+                    )
                 ),
-                Container(
-                  alignment: Alignment.topRight,
-                  margin: const EdgeInsets.only(top: 80.0, right: 30.0),
-                  child: Text('DULMAYNAY!',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold) ),
-                )
-              ],
-            ),
+              ),
+              Container(
+                alignment: Alignment.topRight,
+                margin: const EdgeInsets.only(top: 80.0, right: 30.0),
+                child: Text('DULMAYNAY!',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold) ),
+              )
+            ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
 
 class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
-
-
 }
 
-class Splash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-      seconds: 6,
-      navigateAfterSeconds: new Home(),
-      title: new Text('Dulmaynayyy',textScaleFactor: 2,),
-      image: Image.asset(
-        'images/2.2.png',
-      ),
-      loadingText: Text("Loading"),
-      photoSize: 100.0,
-      loaderColor: Color(0xFF8c0074),
-    );
-  }
-}
+// class Splash extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SplashScreen(
+//       seconds: 6,
+//       navigateAfterSeconds: new Home(),
+//       title: new Text('Dulmaynayyy',textScaleFactor: 2,),
+//       image: Image.asset(
+//         'images/2.2.png',
+//       ),
+//       loadingText: Text("Loading"),
+//       photoSize: 100.0,
+//       loaderColor: Color(0xFF8c0074),
+//     );
+//   }
+// }
 
 class _HomeState extends State<Home> {
   final Firestore firestore = Firestore.instance;
