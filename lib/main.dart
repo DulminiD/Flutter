@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
@@ -16,13 +18,60 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splash(),
+      home: MyHomePage(),
     );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  SplashScreenState createState() => SplashScreenState();
+}
+class SplashScreenState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 5),
+            ()=>Navigator.pushReplacement(context,
+            MaterialPageRoute(builder:
+                (context) => Home()
+            )
+        )
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          body: Center(
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      image: new DecorationImage(
+                        image: new AssetImage('images/2.png'),
+                        fit: BoxFit.cover,
+                      )
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.topRight,
+                  margin: const EdgeInsets.only(top: 80.0, right: 30.0),
+                  child: Text('DULMAYNAY!',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold) ),
+                )
+              ],
+            ),
+          ),
+        ),
+      );
   }
 }
 
 class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
+
+
 }
 
 class Splash extends StatelessWidget {
