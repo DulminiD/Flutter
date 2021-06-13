@@ -90,8 +90,9 @@ class _HomeState extends State<Home> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => StudentView(id: 'IT03'),
-              ));
+                builder: (context) => StudentView(id: 'IT001'),
+              )
+          );
         },
         child: const Icon(Icons.free_breakfast_rounded),
         backgroundColor: Colors.pink,
