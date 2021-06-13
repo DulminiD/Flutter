@@ -167,61 +167,138 @@ class _AddStudentState extends State<AddStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        margin: const EdgeInsets.all(15.0),
-        padding: const EdgeInsets.all(3.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: Colors.blueAccent)
-        ),
-        child: Center(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 22,),
-                Center(
-                  child: GestureDetector( onTap: () {_showPicker(context); },
-                    child: CircleAvatar( radius: 55, backgroundColor: Color(0xffFDCF09),
-                      child: _image != null ? ClipRRect( borderRadius: BorderRadius.circular(50),
-                        child: Image.file(_image, width: 100, height: 100, fit: BoxFit.fitHeight,), )
-                          : Container(decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(50)), width: 100, height: 100,
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: Colors.grey[800],
-                        ),
+        backgroundColor: Color(0xFFe0e0e0),
+      resizeToAvoidBottomInset: false,
+      body:
+          Container(
+            child: Column(
+                children: <Widget>[
+                  Container(
+                    height: 300,
+                      alignment: Alignment.topCenter,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(50.0),
+                              bottomLeft: Radius.circular(50.0)),
+                          image: new DecorationImage(
+                            image: new AssetImage('images/2.2.png'),
+                            fit: BoxFit.cover,
+                          )
                       ),
-                    ),
+                      // decoration: BoxDecoration(
+                      //     image: new DecorationImage(
+                      //       image: new AssetImage('images/8.png'),
+                      //       fit: BoxFit.cover,
+                      //     )
+                      // ),
+                      child: Flexible( child:
+                      Center(
+                        child:
+                        Column(
+                            children: <Widget>[
+
+                              // Container(
+                              //   height: 250.0,
+                              //   width: 250.0,
+                              //   decoration: BoxDecoration(
+                              //     image: DecorationImage(
+                              //       image: AssetImage(
+                              //           'images/2.png'),
+                              //       fit: BoxFit.fill,
+                              //     ),
+                              //     shape: BoxShape.rectangle,
+                              //   ),
+                              // ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 30.0, left: 10, bottom: 30),
+                                child:
+                              Center(
+                                child: GestureDetector( onTap: () {_showPicker(context); },
+                                  child: CircleAvatar( radius: 80, backgroundColor: Color(0xFFc401a3),
+                                    child: _image != null ? ClipRRect( borderRadius: BorderRadius.circular(50),
+                                      child: Image.file(_image, width: 100, height: 100, fit: BoxFit.fitHeight,), )
+                                        : Container(decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(95)), width: 150, height: 150,
+                                      child: Icon(
+                                        Icons.camera_alt,
+                                        color: Colors.grey[800],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              ),
+                              Container(
+                                alignment: Alignment.bottomRight,
+                                margin: const EdgeInsets.only(top: 30.0, left: 20, bottom: 0, right: 20),
+                                child: Text('ADD STUDENT',textAlign: TextAlign.center, style: TextStyle(
+                                    color: Color(0xFF310062), fontSize: 34, fontWeight: FontWeight.bold) ),
+                              ),
+                  ]
+            ),
+          )
+                      ),
+          ),
+                  Container(
+                      margin: const EdgeInsets.only(top: 20, right: 30.0, left: 30.0),
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        // border: Border.all(color: Colors.blue, width: 5),
+                        //   color : Colors.white
+                      ),
+                      child: Center(
+                        child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.center,
+                              child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
+                                controller: sId,
+                                decoration: new InputDecoration(labelText: "Student ID", labelStyle: TextStyle(
+                                    color: Colors.black, fontSize: 20.0
+                                )
+                                ),
+                                onChanged : (value)=>_onChangesId(value),
+                              ),),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
+                                controller: sName,
+                                decoration: new InputDecoration(labelText: "Student Name", labelStyle: TextStyle(
+                                    color: Colors.black, fontSize: 20.0
+                                )),
+                                onChanged : (value)=>_onChangesName(value),
+                              ),),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
+                                controller: sModule,
+                                decoration: new InputDecoration(labelText: "Student Module", labelStyle: TextStyle(
+                                    color: Colors.black, fontSize: 20.0
+                                )),
+                                onChanged : (value)=>_onChangesModule(value),
+                              ),),
+                            ),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.fromLTRB(60, 15, 60, 15),
+                                primary: Colors.white,
+                                backgroundColor: Color(0xFF8c0074),
+                                onSurface: Colors.grey,
+                                textStyle: TextStyle(
+                                  fontSize: 20,
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              child: Text("ADD STUDENT"),
+                              onPressed: ()=> _create(context),
+                            ),
+                          ],
+                        ),
+                      )
                   ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
-                    controller: sId,
-                    decoration: new InputDecoration(labelText: "Student ID"),
-                    onChanged : (value)=>_onChangesId(value),
-                  ),),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
-                    controller: sName,
-                    decoration: new InputDecoration(labelText: "Student Name"),
-                    onChanged : (value)=>_onChangesName(value),
-                  ),),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2, child: TextField(
-                    controller: sModule,
-                    decoration: new InputDecoration(labelText: "Student Module"),
-                    onChanged : (value)=>_onChangesModule(value),
-                  ),),
-                ),
-                RaisedButton(
-                  child: Text("Create"),
-                  onPressed: ()=> _create(context),
-                ),
-              ]),
-        ),
-      )
+            ]),
+                        )
     );
   }
 }

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
 import 'View/StudentView.dart';
 import 'package:splashscreen/splashscreen.dart';
+import 'View/mainView.dart';
+import 'View/background.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Splash(),
     );
   }
@@ -30,13 +33,11 @@ class Splash extends StatelessWidget {
       navigateAfterSeconds: new Home(),
       title: new Text('Dulmaynayyy',textScaleFactor: 2,),
       image: Image.asset(
-        'images/img.png',
-        width: 100,
-        height: 100,
+        'images/2.2.png',
       ),
       loadingText: Text("Loading"),
       photoSize: 100.0,
-      loaderColor: Colors.blue,
+      loaderColor: Color(0xFF8c0074),
     );
   }
 }
@@ -82,10 +83,21 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Flutter CRUD with Firebase"),
-      ),
-      body: Center(
+      backgroundColor: Color(0xFFe0e0e0),
+      body: Container(
+        width: 420,
+        height: 400,
+        alignment: Alignment.topCenter,
+        // constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(50.0),
+                bottomLeft: Radius.circular(50.0)),
+            image: new DecorationImage(
+              image: new AssetImage('images/2.png'),
+              fit: BoxFit.cover,
+            )
+        ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
           RaisedButton(
             child: Text("Create"),
