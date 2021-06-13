@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
+import 'package:mobile_app/View/AddRating.dart';
 import 'View/StudentView.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'View/mainView.dart';
@@ -126,7 +127,12 @@ class _HomeState extends State<Home> {
       print(e);
     }
   }
-
+  void _addRating() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddRating()),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,6 +167,11 @@ class _HomeState extends State<Home> {
           RaisedButton(
             child: Text("Delete"),
             onPressed: _delete,
+          ),
+
+          RaisedButton(
+            child: Text("add Rating"),
+            onPressed: _addRating,
           ),
         ]),
       ),
