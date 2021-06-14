@@ -104,7 +104,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                   AddRating(),
+                                   AddRating(id: dataArray.data['sId'],),
                             ));},
                                 child: SizedBox(
                                     width: 30,

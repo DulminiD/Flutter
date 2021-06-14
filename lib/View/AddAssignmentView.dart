@@ -23,7 +23,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
   final totalMark = TextEditingController();
   final className = TextEditingController();
 
-  void _create() async {
+  void _create(BuildContext context) async {
     try {
       await firestore.collection('assignments').document(assignment.assignID).setData({
         'assignID': assignment.assignID,
@@ -48,7 +48,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
           }
         })
 
-      }).then((value) => print('Assignment added successfully!'));
+      }).then((value) =>  showAlertDialog(context));
 
 
     } catch (e) {
@@ -122,6 +122,41 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
     }
   }
 
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+        clearTextInput();
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Icon(Icons.check_circle_outline_rounded,size:50, color: Color(0xFF7401b8)),
+      content:  Text("Successfully Added !!",textAlign: TextAlign.center,style: TextStyle(color: Color(0xFF7401b8)) ),
+      actions: [
+        okButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  clearTextInput(){
+    assignID.clear();
+    heading.clear();
+    module.clear();
+    className.clear();
+    assignedTo.clear();
+    totalMark.clear();
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -170,6 +205,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                   child: TextFormField(
+                    controller: assignID,
                     onChanged : (value)=>_onChangesId(value),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -187,6 +223,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                     child: TextFormField(
+                      controller: heading,
                       onChanged : (value)=>_onChangesHeading(value),
                       decoration: new InputDecoration(labelText: "Assignment Heading", labelStyle: TextStyle(
                           color: Color(0xFF7401b8), fontSize: 20.0
@@ -198,6 +235,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                     child: TextFormField(
+                      controller: module,
                       onChanged : (value)=>_onChangesModule(value),
                       decoration: new InputDecoration(labelText: "Module", labelStyle: TextStyle(
                           color: Color(0xFF7401b8), fontSize: 20.0
@@ -209,6 +247,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                     child: TextFormField(
+                      controller: className,
                       onChanged : (value)=>_onChangesClassName(value),
                       decoration: new InputDecoration(labelText: "Assigned Class", labelStyle: TextStyle(
                           color: Color(0xFF7401b8), fontSize: 20.0
@@ -220,6 +259,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                     child: TextFormField(
+                      controller: assignedTo,
                       onChanged : (value)=>_onChangesAssign(value),
                       decoration: new InputDecoration(labelText: "Assigned Lecturer", labelStyle: TextStyle(
                           color: Color(0xFF7401b8), fontSize: 20.0
@@ -231,6 +271,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                   alignment: Alignment.center,
                   child: SizedBox(width: MediaQuery.of(context).size.width*0.8, height: MediaQuery.of(context).size.width*0.2,
                     child: TextFormField(
+                      controller: totalMark,
                       onChanged : (value)=>_onChangesMark(value),
                       decoration: new InputDecoration(labelText: "Assigned Mark", labelStyle: TextStyle(
                           color: Color(0xFF7401b8), fontSize: 20.0
@@ -255,7 +296,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
                           ),
                         ),
                         child: Text("ADD ASSIGNMENT",   style: TextStyle(fontSize: 17)),
-                        onPressed: ()=> _create(),
+                        onPressed: ()=> _create(context),
                       ),
                   ),
                 ),

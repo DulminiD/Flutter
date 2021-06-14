@@ -43,7 +43,7 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
         mappingList.add({
           'mark':key.value.toString(),
           'assignment':key.key,
-          'classAverage': (total/count).toString()
+          'classAverage': (total/count).toStringAsFixed(2)
         });
       }
 
@@ -51,7 +51,7 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
       mappingList.add({
         'mark':key.value.toString(),
         'assignment':key.key,
-        'classAverage': (total/count).toString()
+        'classAverage': (total/count).toStringAsFixed(2)
       });
     }
 
@@ -88,27 +88,30 @@ Widget studentDetails(details) {
               children: <Widget>[
                 new Padding(
                   padding: const EdgeInsets.all(0.0),
-                  child: details['sImagePath'] != null ? new Container(
-                    margin: const EdgeInsets.all(16.0),
-                    child: new Container(
-                      width: 100.0,
-                      height: 100.0,
-                    ),
-                    decoration: new BoxDecoration(
-                      borderRadius: new BorderRadius.circular(100.0),
-                      color: Colors.grey,
-                      // image: new DecorationImage(
-                      //     image: new AssetImage(details['sImagePath']),
-                      //     fit: BoxFit.cover),
-                      boxShadow: [
-                        new BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 5.0,
-                            offset: new Offset(2.0, 5.0))
-                      ],
-                    ),
-                  )
-                  : new Container(
+                  child:
+                  //details['sImagePath'] != null ?
+                  // new Container(
+                  //   margin: const EdgeInsets.all(16.0),
+                  //   child: new Container(
+                  //     width: 100.0,
+                  //     height: 100.0,
+                  //   ),
+                  //   decoration: new BoxDecoration(
+                  //     borderRadius: new BorderRadius.circular(100.0),
+                  //     color: Colors.grey,
+                  //     // image: new DecorationImage(
+                  //     //     image: new AssetImage(details['sImagePath']),
+                  //     //     fit: BoxFit.cover),
+                  //     boxShadow: [
+                  //       new BoxShadow(
+                  //           color: Colors.black12,
+                  //           blurRadius: 5.0,
+                  //           offset: new Offset(2.0, 5.0))
+                  //     ],
+                  //   ),
+                  // )
+                  //:
+                  new Container(
                     margin: const EdgeInsets.all(16.0),
                     child: new Container(
                       child: Icon(Icons.account_circle,size: 110,),
@@ -148,6 +151,7 @@ Widget studentDetails(details) {
                               fontSize: 17
                           ),),
                         new Padding(padding: const EdgeInsets.all(2.0)),
+                        ratedBar(4.0)
                       ],
                         crossAxisAlignment: CrossAxisAlignment.start,),
                     )
@@ -170,7 +174,7 @@ Widget studentDetails(details) {
 
 Widget assignmentDetails(assignments,buildContext){
   return Container(
-    height: MediaQuery.of(buildContext).size.height/1.75,
+    height: MediaQuery.of(buildContext).size.height/1.9,
     child: ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -219,13 +223,13 @@ Widget assignmentDetails(assignments,buildContext){
 
       }));
 }
-
-Widget addRate(stId){
+bool a = false;
+Widget addRate(stId,BuildContext context){
     return Dialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     elevation: 16,
     child: Container(
-      height: 400.0,
+      height: 450.0,
       width: 360.0,
       child: ListView(
         children: <Widget>[
@@ -238,10 +242,8 @@ Widget addRate(stId){
           ),
           SizedBox(height: 20),
           Center(
-            child: ratingBar(stId),
+            child: ratingBar(stId, context),
           ),
-
-
         ],
       ),
     ),
@@ -250,7 +252,22 @@ Widget addRate(stId){
 
 double rate = 0;
 
-Widget ratingBar(stId) {
+Widget ratedBar(rated){
+  return RatingBar.builder(
+    initialRating: rated,
+    minRating: rated,
+    direction: Axis.horizontal,
+    allowHalfRating: true,
+    itemCount: 5,
+    itemBuilder: (context, _) => Icon(
+      Icons.star,
+      color: Colors.amber,
+      size: 2.0,
+    ),
+  );
+}
+
+Widget ratingBar(stId, BuildContext context) {
   return RatingBar.builder(
     initialRating: 3,
     itemCount: 5,
@@ -285,18 +302,47 @@ Widget ratingBar(stId) {
     },
     onRatingUpdate: (rating) {
       print(rating);
-      _addRating(rating,stId);
+      _addRating(rating,stId, context);
     },
   );
 }
 
-  void _addRating(value, stId) async {
+
+
+  void _addRating(value, stId, BuildContext context) async {
     try {
       await Firestore.instance.collection('users').document(stId)
           .setData({'rating': value}, merge: true).then((value) =>
           print('rating added successfuly'));
+          showAlertDialog(context, value);
+
     } catch (e) {
       print(e);
     }
   }
 
+
+showAlertDialog(BuildContext context, value) {
+  // set up the button
+  Widget okButton = FlatButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context, rootNavigator: true).pop();
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Icon(Icons.check_circle_outline_rounded,size:50, color: Color(0xFF7401b8)),
+    content:  Text("Rated as ${value}/5!!",textAlign: TextAlign.center,style: TextStyle(color: Color(0xFF7401b8)) ),
+    actions: [
+      okButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}

@@ -5,20 +5,24 @@ import 'package:flutter/widgets.dart';
 import 'package:mobile_app/Util/AddRatingUtil.dart';
 
 class AddRating extends StatefulWidget {
-  const AddRating({Key key}) : super(key: key);
-
+  final String id;
+  const AddRating({Key key,@required this.id}) : super(key: key);
   @override
-  _AddRatingState createState() => _AddRatingState();
+  _AddRatingState createState() => _AddRatingState(this.id);
 }
 
 class _AddRatingState extends State<AddRating> {
+  String id;
 
+  _AddRatingState(String id){
+    this.id =id;
+  }
   final Firestore firestore = Firestore.instance;
 
 
   @override
   Widget build(BuildContext context) {
-
+    print('iddddddddddddddddddddddddddddddddddddddddd: ${id}');
     return Scaffold(
       backgroundColor: Color(0xFFe0e0e0),
       body: Container(
@@ -61,7 +65,7 @@ class _AddRatingState extends State<AddRating> {
           showDialog(
               context: context,
               builder: (context) {
-                return  addRate('IT001');
+                return  addRate('IT001', context);
               }
           );
         },
