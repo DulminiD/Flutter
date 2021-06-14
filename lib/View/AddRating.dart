@@ -15,15 +15,6 @@ class _AddRatingState extends State<AddRating> {
 
   final Firestore firestore = Firestore.instance;
 
-  void _addRating(value) async {
-    try {
-      await firestore.collection('users').document('user_test')
-          .setData({'rating': value}, merge: true).then((value) =>
-          print('rating added successfuly'));
-    } catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +23,7 @@ class _AddRatingState extends State<AddRating> {
       backgroundColor: Color(0xFFe0e0e0),
       body: Container(
         width: 420,
-        height: 400,
+        height: 900,
         alignment: Alignment.topCenter,
         // constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
@@ -61,7 +52,18 @@ class _AddRatingState extends State<AddRating> {
             ],
         ),
       ),
-      bottomNavigationBar: addRate('IT001'),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+               return  addRate('IT001');
+              }
+          );
+        },
+        child: const Icon(Icons.add_reaction_rounded),
+        backgroundColor: Colors.pink,
+      ),
     );
   }
 }
