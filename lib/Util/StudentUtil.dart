@@ -21,11 +21,14 @@ Widget studentWidget(context, DocumentSnapshot data) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EditStudentView(id: 'IT03'),
+              builder: (context) => EditStudentView(id: data['sId']),
             ));
       },
-      child: const Icon(Icons.edit_outlined ),
-      backgroundColor: Colors.amber[600],
+      child: const Icon(
+          Icons.edit_outlined,
+      ),
+      backgroundColor: Color(0xFF8c0074),
+
     ),
   );
 
@@ -107,8 +110,8 @@ Widget listAssignment(data) {
     itemBuilder: (context, index) {
       return Container(
         height: 50,
-        color: Colors.amber[300 - (index * 100)],
-        child: Center(child: Text('Assignment ${index+1} - ${data[index.toString()]}')),
+        color: Colors.deepPurple[100],
+        child: Center(child: Text('Assignment ${index+1} - ${data.values.elementAt(index)}')),
       );
     },
   );

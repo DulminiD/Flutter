@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/View/StudentView.dart';
 
 Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
-  TextEditingController controller =
-      new TextEditingController(text: data["sName"]);
+  TextEditingController controller = new TextEditingController(text: data["sName"]);
   List<TextEditingController> controllers = [];
+  List<String> assignmentNames = [];
+
   Widget body = Scaffold(
     body: Column(children: [
       Container(
@@ -66,11 +67,11 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
         padding: const EdgeInsets.all(30),
         itemCount: data["assignments"].length,
         itemBuilder: (context, index) {
-          controllers.add(new TextEditingController(
-              text: data["assignments"][index.toString()].toString()));
+          controllers.add(new TextEditingController(text: data["assignments"].values.elementAt(index).toString()));
+          assignmentNames.add(data["assignments"].keys.elementAt(index));
           return Container(
             height: 50,
-            color: Colors.amber[300 - (index * 100)],
+            color: Colors.deepPurple[100],
             child: Center(
                 child: Row(
               children: [
@@ -92,15 +93,15 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
       TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-          primary: Colors.black,
-          backgroundColor: Colors.amber[300],
+          primary: Colors.white,
+          backgroundColor: Color(0xFF8c0074),
           onSurface: Colors.grey,
           textStyle: TextStyle(
               fontSize: 20,
           ),
         ),
         onPressed: () {
-          update(data["sId"], controller, controllers, buildContext);
+          update(data["sId"], controller, controllers, buildContext, assignmentNames);
         },
         child: Text('Save'),
       ),
@@ -132,14 +133,13 @@ Widget assignmentSection(String name) {
   );
 }
 
-void update(id, TextEditingController controller,
-    List<TextEditingController> controllers, BuildContext buildContext) async {
+void update(id, TextEditingController controller, List<TextEditingController> controllers, BuildContext buildContext, List<String> assignmentNames) async {
   final Firestore firestore = Firestore.instance;
   print(id);
   print(controller.text);
   HashMap hashMap = new HashMap<String, int>();
   for (var i = 0; i < controllers.length; i++) {
-    hashMap[i.toString()] = int.parse(controllers[i].text);
+    hashMap[assignmentNames[i]] = int.parse(controllers[i].text);
   }
   print(hashMap);
   try {
