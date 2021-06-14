@@ -82,7 +82,17 @@ class _AddStudentState extends State<AddStudent> {
 
   showAlertDialog(BuildContext context) {
     // set up the button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
+        style: TextButton.styleFrom(
+          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          primary: Colors.white,
+          backgroundColor: Color(0xFF8c0074),
+          onSurface: Colors.grey,
+          textStyle: TextStyle(
+            fontSize: 20,
+              fontWeight: FontWeight.bold
+          ),
+        ),
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -90,12 +100,68 @@ class _AddStudentState extends State<AddStudent> {
       },
     );
     // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Success"),
-      content: Text("Student added!"),
-      actions: [
-        okButton,
-      ],
+    // AlertDialog alert = AlertDialog(
+    //   title: Text("Success"),
+    //   content: Text("Student added!"),
+    //   actions: [
+    //     okButton,
+    //   ],
+    // );
+    const title = 'Succesfully added a new student!!';
+    Dialog alert = Dialog(
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4)
+      ),
+      child: Container(
+        height: 200,
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                color: Colors.white70,
+                child: Icon(Icons.assignment_turned_in_sharp, size: 60,),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: Color(0xFF8c0074),
+                child: SizedBox.expand(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(title,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                            primary: Colors.black,
+                            backgroundColor: Color(0xFFe0e0e0),
+                            onSurface: Colors.grey,
+                            textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          child: Text('OK!'),
+                          onPressed: ()=> {
+                            Navigator.of(context).pop()
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
     // show the dialog
     showDialog(
@@ -215,8 +281,8 @@ class _AddStudentState extends State<AddStudent> {
                               Center(
                                 child: GestureDetector( onTap: () {_showPicker(context); },
                                   child: CircleAvatar( radius: 80, backgroundColor: Color(0xFFc401a3),
-                                    child: _image != null ? ClipRRect( borderRadius: BorderRadius.circular(50),
-                                      child: Image.file(_image, width: 100, height: 100, fit: BoxFit.fitHeight,), )
+                                    child: _image != null ? ClipRRect( borderRadius: BorderRadius.circular(80),
+                                      child: Image.file(_image, width: 150, height: 150, fit: BoxFit.fitHeight,), )
                                         : Container(decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(95)), width: 150, height: 150,
                                       child: Icon(
                                         Icons.camera_alt,
@@ -279,19 +345,59 @@ class _AddStudentState extends State<AddStudent> {
                                 onChanged : (value)=>_onChangesModule(value),
                               ),),
                             ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                padding: EdgeInsets.fromLTRB(60, 15, 60, 15),
-                                primary: Colors.white,
-                                backgroundColor: Color(0xFF8c0074),
-                                onSurface: Colors.grey,
-                                textStyle: TextStyle(
-                                  fontSize: 20,
-                                    fontWeight: FontWeight.bold
+                            // TextButton(
+                            //   style: TextButton.styleFrom(
+                            //     padding: EdgeInsets.fromLTRB(60, 15, 60, 15),
+                            //     primary: Colors.white,
+                            //     backgroundColor: Color(0xFF8c0074),
+                            //     onSurface: Colors.grey,
+                            //     textStyle: TextStyle(
+                            //       fontSize: 20,
+                            //         fontWeight: FontWeight.bold
+                            //     ),
+                            //   ),
+                            //   child: Text("ADD STUDENT"),
+                            //   onPressed: ()=> _create(context),
+                            // ),
+                            Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFc401a3),
+                                      Color(0xFF7401b8),
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  ),
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(25.0),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.purpleAccent.withOpacity(0.5),
+                                      spreadRadius: 4,
+                                      blurRadius: 10,
+                                      offset: Offset(0, 3),
+                                    )
+                                  ]
+                              ),
+                              child: Center(
+                                child: GestureDetector(
+                                  onTap: ()=> _create(context),
+                                  child: Text(
+                                    'ADD STUDENT',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontFamily: "Netflix",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                      letterSpacing: 0.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              child: Text("ADD STUDENT"),
-                              onPressed: ()=> _create(context),
                             ),
                           ],
                         ),
