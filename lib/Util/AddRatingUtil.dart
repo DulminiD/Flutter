@@ -15,7 +15,7 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
   var profile = {};
 
   snapshot.documents.forEach((element) {
-    if(element.data['sId'] == "IT001"){
+    if(element.data['sId'] == "IT002"){
       student.add(element.data);
       if(element.data['assignments'] != null){
         assignments = element.data['assignments'];
@@ -60,9 +60,8 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
   Widget body =  Container(
       child:Column(
         children: <Widget>[
-          // studentDetails(profile),
-          studentDetails2(profile),
-          assignmentDetails(mappingList),
+          studentDetails(profile),
+          assignmentDetails(mappingList,buildContext),
         ],
       ),
     );
@@ -70,14 +69,14 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
   return body;
 }
 
-Widget studentDetails2(details) {
+Widget studentDetails(details) {
   return  Container(
     child: Card(
       elevation: 8.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 60.0),
+      margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Container(
         height: 170,
         decoration: BoxDecoration(color: Colors.black12,
@@ -99,8 +98,7 @@ Widget studentDetails2(details) {
                       borderRadius: new BorderRadius.circular(100.0),
                       color: Colors.grey,
                       // image: new DecorationImage(
-                      //     image: new NetworkImage(
-                      //         image_url + movies[i]['poster_path']),
+                      //     image: new AssetImage(details['sImagePath']),
                       //     fit: BoxFit.cover),
                       boxShadow: [
                         new BoxShadow(
@@ -126,7 +124,7 @@ Widget studentDetails2(details) {
                       margin: const      EdgeInsets.fromLTRB(16.0,0.0,16.0,0.0),
                       child: new Column(children: [
                         new Text(
-                          '${details['sId']}',
+                          'PROFILE | ${details['sId']}',
                           style: new TextStyle(
                               fontSize: 20.0,
                               fontFamily: 'Arvo',
@@ -170,8 +168,10 @@ Widget studentDetails2(details) {
   );
 }
 
-Widget assignmentDetails(assignments){
-  return ListView.builder(
+Widget assignmentDetails(assignments,buildContext){
+  return Container(
+    height: MediaQuery.of(buildContext).size.height/1.75,
+    child: ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
       itemCount: assignments.length,
@@ -216,7 +216,8 @@ Widget assignmentDetails(assignments){
 
           ),
         );
-      });
+
+      }));
 }
 
 Widget addRate(stId){
@@ -238,13 +239,16 @@ Widget addRate(stId){
           SizedBox(height: 20),
           Center(
             child: ratingBar(stId),
-          )
+          ),
+
 
         ],
       ),
     ),
   );
 }
+
+double rate = 0;
 
 Widget ratingBar(stId) {
   return RatingBar.builder(
@@ -295,3 +299,4 @@ Widget ratingBar(stId) {
       print(e);
     }
   }
+
