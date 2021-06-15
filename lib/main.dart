@@ -59,8 +59,13 @@ class SplashScreenState extends State<Splash> {
               ),
               Container(
                 alignment: Alignment.topRight,
-                margin: const EdgeInsets.only(top: 80.0, right: 30.0),
-                child: Text('DULMAYNAY!',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold) ),
+                margin: const EdgeInsets.only(top: 550.0, right: 30.0),
+                child: Text('STUDENT',textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF310062), fontSize: 30, fontWeight: FontWeight.bold, ) ),
+              ),
+              Container(
+                alignment: Alignment.topRight,
+                margin: const EdgeInsets.only(top: 600.0, right: 30.0),
+                child: Text('ASSESSMENTS',textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF310062), fontSize: 30, fontWeight: FontWeight.bold) ),
               )
             ],
           ),
