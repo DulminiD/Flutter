@@ -19,7 +19,7 @@ Widget studentWidget(context, DocumentSnapshot data) {
       ),
       fieldSection("Student ID", data['sId'], 20.0, 25.0),
       fieldSection("Name", data['sName'], 23.0, 30.0),
-      fieldSectionRating("Rating", data['rating'], 15.0, 18.0),
+      fieldSectionRating("Rating", data['rating'], 18.0, 18.0),
       assignmentSection("Assignments"),
       Expanded(child: Container(
         child: listAssignment(data["assignments"])),
