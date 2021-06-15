@@ -126,6 +126,7 @@ Widget studentDetails(details) {
                     child: new Container(
                       margin: const      EdgeInsets.fromLTRB(16.0,0.0,16.0,0.0),
                       child: new Column(children: [
+                        new Padding(padding: const EdgeInsets.only(top: 15.0)),
                         new Text(
                           'PROFILE | ${details['sId']}',
                           style: new TextStyle(
@@ -151,7 +152,10 @@ Widget studentDetails(details) {
                               fontSize: 17
                           ),),
                         new Padding(padding: const EdgeInsets.all(2.0)),
-                        ratedBar(4.0)
+                        new Container(
+                          child: details['rating'] != null ? ratedBar(details['rating']) : ratedBar(0.0),
+                        )
+
                       ],
                         crossAxisAlignment: CrossAxisAlignment.start,),
                     )
