@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
 import 'package:mobile_app/View/AddAssignmentView.dart';
 import 'package:mobile_app/View/AddRating.dart';
+import 'package:mobile_app/View/AllStudentListView.dart';
 import 'View/StudentView.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'View/mainView.dart';
@@ -36,7 +37,7 @@ class SplashScreenState extends State<Splash> {
     Timer(Duration(seconds: 5),
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
-                (context) => Home()
+                (context) => AllStudentListView()
             )
         )
     );
