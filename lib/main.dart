@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Controller/addStudent.dart';
+import 'package:mobile_app/View/AddAssignmentView.dart';
+import 'package:mobile_app/View/AddRating.dart';
+import 'package:mobile_app/View/AllStudentListView.dart';
 import 'View/StudentView.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'View/mainView.dart';
@@ -34,7 +37,7 @@ class SplashScreenState extends State<Splash> {
     Timer(Duration(seconds: 5),
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
-                (context) => Home()
+                (context) => AllStudentListView()
             )
         )
     );
@@ -57,8 +60,13 @@ class SplashScreenState extends State<Splash> {
               ),
               Container(
                 alignment: Alignment.topRight,
-                margin: const EdgeInsets.only(top: 80.0, right: 30.0),
-                child: Text('DULMAYNAY!',textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold) ),
+                margin: const EdgeInsets.only(top: 550.0, right: 30.0),
+                child: Text('STUDENT',textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF310062), fontSize: 30, fontWeight: FontWeight.bold, ) ),
+              ),
+              Container(
+                alignment: Alignment.topRight,
+                margin: const EdgeInsets.only(top: 600.0, right: 30.0),
+                child: Text('ASSESSMENTS',textAlign: TextAlign.center, style: TextStyle(color: Color(0xFF310062), fontSize: 30, fontWeight: FontWeight.bold) ),
               )
             ],
           ),
@@ -126,7 +134,18 @@ class _HomeState extends State<Home> {
       print(e);
     }
   }
-
+  void _addRating() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddRating()),
+    );
+  }
+  void _addAssignment() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddAssignmentView()),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,6 +180,15 @@ class _HomeState extends State<Home> {
           RaisedButton(
             child: Text("Delete"),
             onPressed: _delete,
+          ),
+
+          RaisedButton(
+            child: Text("add Rating"),
+            onPressed: _addRating,
+          ),
+          RaisedButton(
+            child: Text("add Assignment"),
+            onPressed: _addAssignment,
           ),
         ]),
       ),
