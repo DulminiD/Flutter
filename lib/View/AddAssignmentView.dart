@@ -166,6 +166,7 @@ class _AddAssignmentViewState extends State<AddAssignmentView> {
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(child:
         Container(
+          margin: const EdgeInsets.only(bottom: 30),
           child: Column(
               children: <Widget>[
                 Container(

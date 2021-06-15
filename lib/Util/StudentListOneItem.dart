@@ -75,7 +75,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                               Text(
                                 '${dataArray.data['sName']}',
                                 style: TextStyle(
-                                    color: Colors.blue[600],
+                                    color: Colors.purpleAccent,
                                     fontFamily: 'avenir',
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16),
@@ -96,7 +96,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                           alignment: Alignment.center,
                           child: ClipOval(
                             child: Material(
-                              color: Colors.blue, // Button color
+                              color: Colors.purpleAccent, // Button color
                               child: InkWell(
                                 splashColor:
                                     Colors.purpleAccent, // Splash color
@@ -109,7 +109,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                                 child: SizedBox(
                                     width: 30,
                                     height: 30,
-                                    child: Icon(Icons.compare_sharp)),
+                                    child: Icon(Icons.star)),
                               ),
                             ),
                           )),

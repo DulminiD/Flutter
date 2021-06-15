@@ -68,7 +68,7 @@ class _AddRatingState extends State<AddRating> {
               }
           );
         },
-        child: const Icon(Icons.assignment),
+        child: const Icon(Icons.star),
         backgroundColor: Colors.pink,
       ),
     );
