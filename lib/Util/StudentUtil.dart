@@ -17,8 +17,9 @@ Widget studentWidget(context, DocumentSnapshot data) {
           alignment: Alignment.center,
           child: imgSection(data['sImagePath'])
       ),
-      fieldSection("Student ID", data['sId'], 22.0, 30.0),
-      fieldSection("Name", data['sName'], 22.0, 22.0),
+      fieldSection("Student ID", data['sId'], 20.0, 25.0),
+      fieldSection("Name", data['sName'], 23.0, 30.0),
+      fieldSectionRating("Rating", data['rating'], 18.0, 18.0),
       assignmentSection("Assignments"),
       Expanded(child: Container(
         child: listAssignment(data["assignments"])),
@@ -92,7 +93,7 @@ Widget imgSection(path){
 
 Widget fieldSection(String name, String id, double font1, double font2) {
   return Container(
-    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -116,6 +117,39 @@ Widget fieldSection(String name, String id, double font1, double font2) {
                   fontSize: font2,
                   fontWeight: FontWeight.w600,
                 fontFamily: 'PermanentMarker'
+              ),
+            ))
+      ],
+    ),
+  );
+}
+
+Widget fieldSectionRating(String name, double id, double font1, double font2) {
+  return Container(
+    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Expanded(
+            flex: 2,
+            child: Center(
+              child: Text(
+                name,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: font1,
+                    fontWeight: FontWeight.w500
+                ),
+              ),
+            )),
+        Expanded(
+            flex: 3,
+            child: Text(
+              id.toString(),
+              style: TextStyle(
+                  fontSize: font2,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'PermanentMarker'
               ),
             ))
       ],
