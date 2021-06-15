@@ -43,7 +43,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                   ),
                 ),
                 Expanded(
-                  flex: 5,
+                  flex: 4,
                   // child: Container(
 
                   child: Padding(
@@ -85,6 +85,24 @@ Padding studenlistView(dataArray, BuildContext context) {
                         ],
                       ),
                     ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: 60,
+                        height: 60,
+                        margin: EdgeInsets.only(top: 50, bottom: 10),
+                        child: Text('${dataArray.data['rating']}/5',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'avenir',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),),
+                      )
+                    ],
                   ),
                 ),
                 Expanded(

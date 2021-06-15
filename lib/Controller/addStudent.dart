@@ -42,6 +42,7 @@ class _AddStudentState extends State<AddStudent> {
         'sName': student.sName,
         'sModule': student.sModule,
         'assignments': hashMap,
+        'rating': 0.0,
         'sImagePath': 'https://www.clevergirlfinance.com/wp-content/uploads/2020/06/college-student-budget.jpg',
       }).then((value) => {
         showAlertDialog(context)

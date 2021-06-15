@@ -19,7 +19,8 @@ class _AllStudentListViewState extends State<AllStudentListView> {
 
   String searchKey;
   Stream<QuerySnapshot> streamQuery =
-      Firestore.instance.collection('users').snapshots();
+      Firestore.instance.collection('users')
+      .orderBy('rating').snapshots();
   // TextEditingController _controller = TextEditingController();
 
   @override
@@ -45,6 +46,7 @@ class _AllStudentListViewState extends State<AllStudentListView> {
           .collection('users')
           .where('sName', isGreaterThanOrEqualTo: searchKey)
           .where('sName', isLessThan: searchKey + 'z')
+          .orderBy('rating')
           .snapshots();
     });
   }
