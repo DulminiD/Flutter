@@ -38,7 +38,7 @@ class _AddStudentState extends State<AddStudent> {
         'sId': student.sId,
         'sName': student.sName,
         'sModule': student.sModule,
-        'sImagePath': student.sImage
+        'sImagePath': 'https://www.clevergirlfinance.com/wp-content/uploads/2020/06/college-student-budget.jpg',
       }).then((value) => {
         showAlertDialog(context)
       });

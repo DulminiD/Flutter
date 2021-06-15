@@ -37,7 +37,7 @@ Padding studenlistView(dataArray, BuildContext context) {
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT85rYK5YznuLXnNlbKoK-iRxOLyywBcT6Y3w&usqp=CAU"))),
+                                    dataArray.data['sImagePath']))),
                       )
                     ],
                   ),
