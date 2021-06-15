@@ -46,7 +46,6 @@ class _AllStudentListViewState extends State<AllStudentListView> {
           .collection('users')
           .where('sName', isGreaterThanOrEqualTo: searchKey)
           .where('sName', isLessThan: searchKey + 'z')
-          .orderBy('rating')
           .snapshots();
     });
   }

@@ -31,7 +31,7 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
               children: [
                 Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -49,7 +49,7 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
                     )
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -59,7 +59,7 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
                             child: Text(
                               "Name",
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 22.0,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -174,7 +174,7 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
 
 Widget assignmentSection(String name) {
   return Container(
-    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [

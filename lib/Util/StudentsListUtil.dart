@@ -174,6 +174,7 @@ Container _getStickyWidget(_controller, _changeState, bool status) {
     child: Padding(
       padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
       child: TextField(
+        autofocus: false,
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 18),
         onChanged: (value) {
           _changeState(value);
