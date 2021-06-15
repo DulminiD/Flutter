@@ -126,6 +126,7 @@ Widget studentDetails(details) {
                     child: new Container(
                       margin: const      EdgeInsets.fromLTRB(16.0,0.0,16.0,0.0),
                       child: new Column(children: [
+                        new Padding(padding: const EdgeInsets.only(top: 15.0)),
                         new Text(
                           'PROFILE | ${details['sId']}',
                           style: new TextStyle(

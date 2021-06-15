@@ -5,15 +5,24 @@ import 'package:mobile_app/View/EditStudentView.dart';
 
 Widget studentWidget(context, DocumentSnapshot data) {
   Widget body = Scaffold(
+    backgroundColor: Color(0xFFe0e0e0),
     body: Column(children: [
       Container(
-          alignment: Alignment.topCenter,
-          margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-          child: imgSection),
+          height: 300,
+          decoration: BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('images/2.2.png'),
+                fit: BoxFit.cover,
+              )),
+          alignment: Alignment.center,
+          child: imgSection(data['sImagePath'])
+      ),
       fieldSection("Student ID", data['sId'], 22.0, 30.0),
       fieldSection("Name", data['sName'], 22.0, 22.0),
       assignmentSection("Assignments"),
-      Expanded(child: listAssignment(data["assignments"])),
+      Expanded(child: Container(
+        child: listAssignment(data["assignments"])),
+      )
     ]),
     floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     floatingActionButton: FloatingActionButton(
@@ -25,56 +34,89 @@ Widget studentWidget(context, DocumentSnapshot data) {
             ));
       },
       child: const Icon(
-          Icons.edit_outlined,
+        Icons.edit_outlined,
       ),
       backgroundColor: Color(0xFF8c0074),
-
     ),
   );
 
   return body;
 }
 
-Widget imgSection = Container(
-  decoration: BoxDecoration(
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 8,
-        blurRadius: 25,
-        offset: Offset(15, 15), // changes position of shadow
+Widget imgSection1 = Container(
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 8,
+          blurRadius: 25,
+          offset: Offset(15, 15), // changes position of shadow
+        ),
+      ],
+    ),
+    child: Container(
+      child: Image.asset(
+        'images/img.png',
+        width: 200,
+        height: 200,
       ),
-    ],
-  ),
-  child: Image.asset(
-    'images/img.png',
-    width: 200,
-    height: 200,
-  ),
-);
+    ));
+
+Widget imgSection(path){
+  return Container(
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 8,
+          blurRadius: 25,
+          offset: Offset(15, 15), // changes position of shadow
+        ),
+      ],
+    ),
+    child: Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                  path
+              )
+          )
+      ),
+    ),
+  );
+}
 
 Widget fieldSection(String name, String id, double font1, double font2) {
   return Container(
-    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Expanded(
-            flex: 3,
+            flex: 2,
             child: Center(
               child: Text(
                 name,
                 style: TextStyle(
-                    color: Colors.grey,
+                    color: Colors.black,
                     fontSize: font1,
-                    fontWeight: FontWeight.w300),
+                    fontWeight: FontWeight.w500
+                ),
               ),
             )),
         Expanded(
-            flex: 2,
+            flex: 3,
             child: Text(
               id,
-              style: TextStyle(fontSize: font2, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  fontSize: font2,
+                  fontWeight: FontWeight.w600,
+                fontFamily: 'PermanentMarker'
+              ),
             ))
       ],
     ),
@@ -93,7 +135,7 @@ Widget assignmentSection(String name) {
               child: Text(
                 name,
                 style: TextStyle(
-                    color: Colors.grey,
+                    color: Colors.black,
                     fontSize: 22.0,
                     fontWeight: FontWeight.w300),
               ),
@@ -110,8 +152,16 @@ Widget listAssignment(data) {
     itemBuilder: (context, index) {
       return Container(
         height: 50,
-        color: Colors.deepPurple[100],
-        child: Center(child: Text('Assignment ${index+1} - ${data.values.elementAt(index)}')),
+        margin: const EdgeInsets.only(top: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20))
+        ),
+        child: Center(
+            child: Text(
+                'Assignment ${index + 1} - ${data.values.elementAt(index)}',
+            ),
+        ),
       );
     },
   );

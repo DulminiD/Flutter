@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_app/Model/Student.dart';
@@ -33,11 +35,13 @@ class _AddStudentState extends State<AddStudent> {
 
   void _create(BuildContext context) async {
     await addImage();
+    HashMap hashMap = new HashMap<String, int>();
     try {
       await firestore.collection('users').document(student.sId).setData({
         'sId': student.sId,
         'sName': student.sName,
         'sModule': student.sModule,
+        'assignments': hashMap,
         'sImagePath': 'https://www.clevergirlfinance.com/wp-content/uploads/2020/06/college-student-budget.jpg',
       }).then((value) => {
         showAlertDialog(context)
