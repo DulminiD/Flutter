@@ -15,7 +15,8 @@ Widget studentWidget(context, DocumentSnapshot data) {
                 fit: BoxFit.cover,
               )),
           alignment: Alignment.center,
-          child: imgSection),
+          child: imgSection(data['sImagePath'])
+      ),
       fieldSection("Student ID", data['sId'], 22.0, 30.0),
       fieldSection("Name", data['sName'], 22.0, 22.0),
       assignmentSection("Assignments"),
@@ -42,7 +43,7 @@ Widget studentWidget(context, DocumentSnapshot data) {
   return body;
 }
 
-Widget imgSection = Container(
+Widget imgSection1 = Container(
     decoration: BoxDecoration(
       boxShadow: [
         BoxShadow(
@@ -61,9 +62,37 @@ Widget imgSection = Container(
       ),
     ));
 
+Widget imgSection(path){
+  return Container(
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 8,
+          blurRadius: 25,
+          offset: Offset(15, 15), // changes position of shadow
+        ),
+      ],
+    ),
+    child: Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(100),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                  path
+              )
+          )
+      ),
+    ),
+  );
+}
+
 Widget fieldSection(String name, String id, double font1, double font2) {
   return Container(
-    margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+    margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [

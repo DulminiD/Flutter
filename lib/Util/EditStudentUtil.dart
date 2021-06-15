@@ -35,13 +35,15 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        imgSection,
+                        imgSection(data['sImagePath']),
                         Text(
                           data['sId'],
                           style: TextStyle(
                               fontSize: 50,
                               color: Colors.white,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600,
+                              fontFamily: 'PermanentMarker'
+                          ),
                         ),
                       ],
                     )
@@ -154,8 +156,9 @@ Widget editStudentWidget(DocumentSnapshot data, BuildContext buildContext) {
                   ),
                 ),
                 onPressed: () {
-                  update(data["sId"], controller, controllers, buildContext,
-                      assignmentNames);
+                    confirmAndUpdate(buildContext,
+                        data["sId"], controller, controllers,
+                        assignmentNames);
                 },
                 child: Text(
                   'SAVE',
@@ -218,20 +221,67 @@ void update(id,
   }
 }
 
-Widget imgSection = Container(
-  decoration: BoxDecoration(
-    boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 8,
-        blurRadius: 25,
-        offset: Offset(15, 15), // changes position of shadow
+Widget imgSection(path){
+  return Container(
+    decoration: BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 8,
+          blurRadius: 25,
+          offset: Offset(15, 15), // changes position of shadow
+        ),
+      ],
+    ),
+    child: Container(
+      width: 120,
+      height: 120,
+      margin: EdgeInsets.only(top: 10, bottom: 10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(60),
+          image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                  path
+              )
+          )
       ),
-    ],
-  ),
-  child: Image.asset(
-    'images/img.png',
-    width: 150,
-    height: 150,
-  ),
-);
+    ),
+  );
+}
+
+Future confirmAndUpdate(buildContext, id, controller, controllers,assignmentNames) {
+  return showDialog(
+    context: buildContext,
+    builder: (BuildContext context) {
+      // return object of type Dialog
+      return AlertDialog(
+        title: new Text("Confirm update"),
+        content: new Text("Are you sure to update this student ?"),
+        actions: <Widget>[
+          // usually buttons at the bottom of the dialog
+          new FlatButton(
+            child: new Text(
+                "Update",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400),
+            ),
+            color: Color(0xFF8c0074),
+            onPressed: () {
+              update(id, controller, controllers, buildContext, assignmentNames);
+              Navigator.of(context).pop();
+            },
+          ),
+          new FlatButton(
+            child: new Text("Cancel"),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      );
+    },
+  );
+}
