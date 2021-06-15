@@ -22,7 +22,6 @@ class _AddRatingState extends State<AddRating> {
 
   @override
   Widget build(BuildContext context) {
-    print('iddddddddddddddddddddddddddddddddddddddddd: ${id}');
     return Scaffold(
       backgroundColor: Color(0xFFe0e0e0),
       body: Container(
@@ -51,7 +50,7 @@ class _AddRatingState extends State<AddRating> {
                   if (!snapshot.hasData) {
                     return widget = Text('...Loading!!');
                   }else{
-                    widget = addRatingWidget(snapshot.data, context);
+                    widget = addRatingWidget(snapshot.data, context, id);
                   }
                   return widget;
                 }
@@ -65,7 +64,7 @@ class _AddRatingState extends State<AddRating> {
           showDialog(
               context: context,
               builder: (context) {
-                return  addRate('IT001', context);
+                return  addRate(id, context);
               }
           );
         },

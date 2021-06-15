@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 
-Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
+Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext, id) {
   var assignments = {};
   var total;
   var count;
@@ -15,7 +15,7 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
   var profile = {};
 
   snapshot.documents.forEach((element) {
-    if(element.data['sId'] == "IT002"){
+    if(element.data['sId'] == id){
       student.add(element.data);
       if(element.data['assignments'] != null){
         assignments = element.data['assignments'];
@@ -38,7 +38,7 @@ Widget addRatingWidget(QuerySnapshot snapshot, BuildContext buildContext) {
     });
 
     if(mappingList.length != 0){
-      List c = mappingList.where((e) => e["name"] == key.key).toList();
+      List c = mappingList.where((e) => e["assignment"] == key.key).toList();
       if(c.length == 0){
         mappingList.add({
           'mark':key.value.toString(),
