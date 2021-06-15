@@ -80,25 +80,25 @@ class _AddStudentState extends State<AddStudent> {
     }
   }
 
-  showAlertDialog(BuildContext context) {
+  showAlertDialog(BuildContext context) async {
     // set up the button
-    Widget okButton = TextButton(
-        style: TextButton.styleFrom(
-          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-          primary: Colors.white,
-          backgroundColor: Color(0xFF8c0074),
-          onSurface: Colors.grey,
-          textStyle: TextStyle(
-            fontSize: 20,
-              fontWeight: FontWeight.bold
-          ),
-        ),
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-        clearTextInput();
-      },
-    );
+    // Widget okButton = TextButton(
+    //     style: TextButton.styleFrom(
+    //       padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+    //       primary: Colors.white,
+    //       backgroundColor: Color(0xFF8c0074),
+    //       onSurface: Colors.grey,
+    //       textStyle: TextStyle(
+    //         fontSize: 20,
+    //           fontWeight: FontWeight.bold
+    //       ),
+    //     ),
+    //   child: Text("OK"),
+    //   onPressed: () {
+    //     Navigator.of(context).pop();
+    //     clearTextInput();
+    //   },
+    // );
     // set up the AlertDialog
     // AlertDialog alert = AlertDialog(
     //   title: Text("Success"),
@@ -149,8 +149,9 @@ class _AddStudentState extends State<AddStudent> {
                             ),
                           ),
                           child: Text('OK!'),
-                          onPressed: ()=> {
-                            Navigator.of(context).pop()
+                          onPressed: () {
+                            Navigator.of(context, rootNavigator: true).pop();
+                            clearTextInput();
                           },
                         )
                       ],

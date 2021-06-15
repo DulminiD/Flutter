@@ -247,7 +247,7 @@ Future confirmAndDetele(context, String studentID) {
             },
           ),
           new FlatButton(
-            child: new Text("Cancle"),
+            child: new Text("Cancel"),
             color: Colors.blue,
             onPressed: () {
               Navigator.of(context).pop();
