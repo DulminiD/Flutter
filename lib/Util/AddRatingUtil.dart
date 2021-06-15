@@ -151,7 +151,10 @@ Widget studentDetails(details) {
                               fontSize: 17
                           ),),
                         new Padding(padding: const EdgeInsets.all(2.0)),
-                        ratedBar(4.0)
+                        new Container(
+                          child: details['rating'] != null ? ratedBar(details['rating']) : ratedBar(0.0),
+                        )
+
                       ],
                         crossAxisAlignment: CrossAxisAlignment.start,),
                     )
